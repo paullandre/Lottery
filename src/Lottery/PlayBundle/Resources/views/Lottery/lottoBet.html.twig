@@ -1,0 +1,125 @@
+<!--src/Lottery/PlayBundle/Resources/views/Lottery/lottoBet.html.twig-->
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block javascripts %}
+            <script src="{{ asset('frontend/js/jquery.js') }}"></script>
+        {% endblock %}
+
+        {% block stylesheets %}
+            <link href="{{ asset('frontend/css/client.css') }}" type="text/css" rel="stylesheet" />
+        {% endblock %}
+    </head>
+
+    <body>
+        <div id="centerContainer"><br />
+            <label id="linkBet">Back to Bet</label>
+            <div id="betDetails">
+                <div id="divHeader">6/42</div>
+                <div id="betNumbers">
+                    <ul>
+                        <li style="font-weight: bold;">Num:</li>
+                        <li>02</li>
+                        <li>08</li>
+                        <li>12</li>
+                        <li>20</li>
+                        <li>28</li>
+                        <li>35</li>
+                    </ul>
+                </div>
+
+                <div class="details">
+                    <ul>
+                        <li>Date:</li>
+                        <li>sdfsdfsdf</li>
+                   </ul>
+                   <ul>
+                        <li>Ticket Number:</li>
+                        <li>457945757357345</li>
+                    </ul>
+                </div>
+
+                <div class="details">
+                    <ul>
+                        <li>Security Code:</li>
+                        <li>12345678910</li>
+                    </ul>
+                    <ul>
+                        <li>Draw Date:</li>
+                        <li>09/22/2013</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<style>
+#divHeader
+{
+    width: 5em;
+    font-family: Verdana;
+    font-size: 17px;
+    font-weight: bold;
+    margin: auto;
+    padding-top: 1.3em;
+}
+
+#linkBet
+{
+    font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+    font-size: 12px;
+    color: #3B5998;
+    margin-left: 2em;
+    text-decoration: underline;
+}
+
+#linkBet:hover
+{
+    cursor: pointer;
+}
+
+.details ul li
+{
+    list-style: none;
+    display: inline;
+    margin-left: 0.6em;
+}
+
+#betNumbers ul li
+{
+    list-style: none;
+    display: inline;
+    padding: 0 0.5em 0 0.5em;
+    font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+    font-size: 20px;
+}
+
+#centerContainer
+{
+    width: 45em;
+    height: 25em;
+    background-color: #F9F9F9;
+    margin: 5em auto;
+    border: 1px solid #BABABA;
+    border-radius: 5px;
+}
+
+#betDetails
+{
+    background-color: #E5EECC;
+    box-shadow: 10px 10px 5px #888888;
+    width: 28em;
+    height: 20em;
+    margin: auto;
+    border-radius: 5px;
+}
+</style>
+<script>
+    $(document).ready(function()
+    {
+        $("#linkBet").click(function()
+        {
+            document.location.href = "http://lottery.localhost.dev/app_dev.php/index";
+        });
+    });
+</script>

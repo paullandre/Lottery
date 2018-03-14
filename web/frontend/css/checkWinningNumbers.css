@@ -1,0 +1,129 @@
+#centerContainer
+{
+    background-color: darkslategray;
+    width: 45em;
+    height: 35em;
+    margin: 4em auto;
+    text-align: center;
+    border-radius: 10px;
+    padding-top: 2em;
+}
+
+#centerContainer label
+{
+    color: #C1CACA;
+    font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+    font-size: 16px;
+}
+
+hr
+{
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba(0,51,51,0), rgba(0,51,51,0.75), rgba(0,0,0,0));
+    background-image: -moz-linear-gradient(left, rgba(0,51,51,0), rgba(0,51,51,0.75), rgba(0,0,0,0));
+    background-image: -ms-linear-gradient(left, rgba(0,51,51,0), rgba(0,51,51,0.75), rgba(0,0,0,0));
+    background-image: -o-linear-gradient(left, rgba(0,51,51,0), rgba(0,51,51,0.75), rgba(0,0,0,0));
+}
+
+.ins
+{
+    width: 15em;
+    background-color: #788D8D;
+    border-style: none;
+    /*border-bottom: 1px dotted #404040;*/
+    border-radius: 4px 4px 4px 4px !important;
+    height: 30px;
+    font-family: Calibri;
+    font-size: 17px;
+    color: darkslategray;
+    text-align: center;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 15px rgba(85, 85, 85, 0.6) !important;
+}
+
+.ins:focus
+{
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 15px rgba(244, 238, 244, 0.6) !important;
+    transition: border 0.8s linear 0s, box-shadow 0.8s linear 0s !important;
+    outline: 0 none;
+}
+
+#seachTexts li
+{
+    width: 20em;
+    color: white;
+    font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+    font-size: 12px;
+    list-style: none;
+    display: inline;
+}
+
+#seachTexts
+{
+    width: 42em;
+}
+
+#bttnSearch
+{
+   font-size:12px;
+   font-family:Tahoma,sans-serif;
+   text-align: center;
+   color: #E0E5E5;
+   width:96px;
+   height:26px;
+   background-color: #788D8D;
+   border: 1px solid #C1CACA;
+   margin-left: 1em
+}
+
+#bttnSearch:hover
+{
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#searchTitle
+{
+    margin: 0 0 1em -34.5em;
+    margin-bottom: 1em;
+}
+
+ul li
+{
+    list-style: none;
+    display: inline;
+}
+
+.li1
+{
+    font-size:14px;
+    font-family:Tahoma,sans-serif;
+    color: white;
+}
+
+#numbers ul li div
+{
+    width: 3.5em;
+    height: 3.5em;
+    background-color: #759E1A;
+    font-size:14px;
+    font-family: Tahoma,sans-serif;
+    line-height: 350%;
+    color: white;
+    border: 1px solid gray;
+}
+
+#numbers ul li
+{
+    list-style: none;
+    display: inline-block;
+    margin: 0 0.7em 0 0.7em;
+}
+
+#divDrawn
+{
+    font-size: 15px;
+    font-family: Tahoma,sans-serif;
+    float: left;
+    color: #C1CACA;
+}

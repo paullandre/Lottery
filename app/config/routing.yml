@@ -1,0 +1,8 @@
+lottery_play:
+    resource: "@LotteryPlayBundle/Resources/config/routing.yml"
+    prefix:   /
+
+play_bundle:
+    resource: "@LotteryPlayBundle/Controller"
+    type:     annotation
+    prefix:   /

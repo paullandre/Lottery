@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        {% block javascripts %}
+            <script src="{{ asset('frontend/js/jquery.js') }}"></script>
+        {% endblock %}
+
+        {% block stylesheets %}
+            <link href="{{ asset('frontend/css/checkWinningNumbers.css') }}" type="text/css" rel="stylesheet" />
+        {% endblock %}
+    </head>
+
+    <body>
+        <div id="centerContainer">
+            <label>Enter Search</label>
+            <hr /> <br /><label id="searchTitle" style="color: #637B7B; font-size: 16px; font-weight: bold;">Search By:</label>
+            <div style="width: 42em; margin: auto;">
+                <ul id="seachTexts">
+                    <li style="margin: 0 1em 0 -6.4em;">
+                        <input class="ins" type="text" placeholder="Ticket Number"/>
+                    </li>
+                    <li>
+                        <input class="ins" type="text"  placeholder="Security Code"/>
+                    </li>
+                    <li>
+                        <input id="bttnSearch" type="button" value="Search"/>
+                    </li>
+                </ul>
+
+                <ul>
+                    <li class="li1" style="margin: 0 0 0 4em; float: left;">Ticket Number</li>
+                    <li class="li1" style="margin: 0 1em 0 0 !important;">Security Code</li>
+                </ul>
+            </div>
+
+            <hr />
+
+            <div style="width: 40em; margin: auto;" id="numbers">
+                <div id="divDrawn">Drawn Numbers</div><br />
+                <ul>
+                    <li style="margin-left: -0.7em;">
+                        <div>1</div>
+                    </li>
+
+                    <li>
+                        <div>2</div>
+                    </li>
+
+                    <li>
+                        <div>3</div>
+                    </li>
+
+                    <li>
+                        <div>4</div>
+                    </li>
+
+                    <li>
+                        <div>5</div>
+                    </li>
+
+                    <li>
+                        <div>6</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

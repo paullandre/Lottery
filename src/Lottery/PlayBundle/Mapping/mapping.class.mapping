@@ -1,0 +1,45 @@
+url: http://lottery.localhost.dev/app_dev.php
+
+pattern:  /index
+controller: LotteryPlayBundle:LottoGameClient:index
+type:
+
+pattern:  /getLatestBet
+controller: LotteryPlayBundle:LottoGameServer:getLatestBet
+type:
+
+pattern:  /lottoBet
+controller: LotteryPlayBundle:LottoGameServer:lottoBet
+type:
+
+pattern:  /validateAll
+controller: LotteryPlayBundle:LottoGameServer:validateAll
+type:
+
+pattern:  /luckyPick
+controller: LotteryPlayBundle:LottoDrawServer:luckyPick
+type:
+
+pattern:  /drawWinningNumbers
+controller: LotteryPlayBundle:LottoDrawServer:drawWinningNumbers
+type:
+
+pattern:  /drawNumbers
+controller: LotteryPlayBundle:LottoDrawServer:drawNumbers
+type:
+
+pattern:  /clientCheckWinners
+controller: LotteryPlayBundle:LottoDrawServer:clientCheckWinners
+type:
+
+pattern:  /exactWinners
+controller: LotteryPlayBundle:LottoDrawServer:exactWinners
+type:
+
+pattern:  /renderWinningNumberTemplate
+template: LotteryPlayBundle:Lottery:checkWinningNumbers.html.twig
+type:
+
+pattern:  /getWinningNumbers
+controller: LotteryPlayBundle:LottoCheckDraw:checkWinningNumbers
+type:

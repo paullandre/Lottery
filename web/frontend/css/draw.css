@@ -1,0 +1,71 @@
+#centerContainer
+{
+    width: 45em;
+    height: 25em;
+    background-color: #F9F9F9;
+    margin: 5em auto;
+    border: 1px solid #BABABA;
+}
+
+ul
+{
+    list-style: none;
+}
+
+#lucky
+{
+    margin: 0 0.6em 0 0;
+}
+
+#bttnDraw
+{
+    font-size:11px;
+    font-family:Tahoma,sans-serif;
+    text-align:left;
+    color:#FFFFFF;
+    width:85px;
+    height:25px;
+    background-color: #2878C0;
+    border-style: solid;
+    border-color: #2878C0 #508CC0 #2878C0 #1858B8;
+    border-width:1px 6px 1px 6px;
+}
+
+#bttnDraw:hover
+{
+    cursor: pointer;
+}
+
+#options
+{
+    float: right;
+    margin: 16em 1em 0 0;
+}
+
+#divHeader
+{
+    background-color: #DAA520;
+    padding: 0.7em 0 0 1em;
+    width: 39em;
+    height: 1.6em;
+    font-size: 18px;
+    font-family: Tahoma,sans-serif;
+    margin-top: -1.1em;
+}
+
+#numberContainer
+{
+    width: 20em;
+    margin: 4em auto;
+}
+
+.luck
+{
+    width: 30px;
+    height: 26px;
+    border: 1px solid #800000;
+    float: left;
+    margin-right: 1em;
+    text-align: center; padding: 6px 2px 0 2px;
+    font-family: tahoma,verdana,arial,sans-serif;
+}

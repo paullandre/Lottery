@@ -1,0 +1,409 @@
+<!--src/Lottery/PlayBundle/Resources/views/Lottery/index.html.twig-->
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block javascripts %}
+            <script src="{{ asset('frontend/js/jquery.js') }}"></script>
+        {% endblock %}
+
+        {% block stylesheets %}
+            <link href="{{ asset('frontend/css/client.css') }}" type="text/css" rel="stylesheet" />
+        {% endblock %}
+    </head>
+
+    <body>
+        <div id="centerContainer"><br />
+            <ul id="mainul"></ul>
+
+            <ul style="margin: -12em 0 0 21em;;">
+                <li id="selected">
+
+                </li>
+            </ul>
+
+            <div id="options">
+                <input type="button" id="lucky" value="Lucky Pick" />
+                <input type="button" id="reset" value="Reset" />
+                <input type="button" id="submitEntry" value="Submit" />
+            </div>
+        </div>
+    </body>
+</html>
+
+<script>
+    $(document).ready(function()
+    {
+        $.f  = "";
+        $.s = "";
+        $.t  = "";
+        $.fo = "";
+        $.fi  = "";
+        $.si  = "";
+        
+        $.luckyArray = new Array();
+
+        $.enabled = false;
+        
+        function checkEnabledLuckyPick()
+        {
+            if($.enabled == true)
+            {
+                console.log("Original: "+$.f +"-"+ $.s +"-"+ $.t +"-"+ $.fo +"-"+ $.fi +"-"+ $.si);
+                $.sorted = $.luckyArray.sort();  
+                console.log("Sorted:NA " + $.sorted[0]+"-"+$.sorted[1]+"-"+$.sorted[2]+"-"+$.sorted[3]+"-"+$.sorted[4]+"-"+$.sorted[5]);
+            }
+        }
+
+        $("#lucky").click(function()
+        {
+            try
+            {
+                $("#selected").children().remove();
+
+                $.ajax({
+                    //url: "http://www.jueteng.dev/app_dev.php/luckyPick",
+                    url: "http://lottery.localhost.dev/app_dev.php/luckyPick",
+                    type: "POST",
+                    success: function(msg)
+                    {
+                        var sep = msg.split(/,/);                                              
+                        
+                        for($.x = 0; $.x <= 5 ; $.x++)
+                        {
+                            $.luckyArray.push(sep[$.x]);
+                            $("#selected").fadeIn('slow').append("<div id='"+($.x+1)+"' class='luck' style='width: 30px;\n\
+                                            height: 26px;\n\
+                                            border: 1px solid #800000;\n\
+                                            float: left;\n\
+                                            margin-right: 1em;\n\
+                                            text-align: center; padding: 6px 2px 0 2px;\n\
+                                            font-family: tahoma,verdana,arial,sans-serif;'>"+sep[$.x]+"<div>");
+                        }
+
+                        $.enabled = true;
+                        
+                        console.log($.luckyArray);
+                        console.log($.luckyArray.sort());
+                        
+                        $("#lucky").attr('disabled','disabled')
+                            .prop("disabled", true)
+                            .css("pointer-events", "none");
+                    },
+                    error:function(msg)
+                    {
+                        alert("Failed: " + msg.status + ": " + msg.statusText);
+                    }
+                });
+            }
+            catch(e)
+            {
+                alert(e.toString());
+            }
+        });
+
+        $("#reset").click(function()
+        {
+            $(".luck").html("");
+            $(".luck").fadeOut("slow");
+            $.boxCounter = 0;
+
+            $(".box").css("background-color", "#DAA520")
+                     .css("color", "#800000")
+                     .css("-webkit-transition","color 1s ease-in")
+                     .css("-moz-transition","color 1s ease-in")
+                     .css("-o-transition","color 1s ease-in")
+                     .css("transition","background-color 1s ease-in")
+                     .css("-webkit-transition","background-color 1s ease-in")
+                     .css("-moz-transition","background-color 1s ease-in")
+                     .css("-o-transition","background-color 1s ease-in")
+                     .css("transition","background-color 1s ease-in");
+             setTimeout(function()
+             {
+                 //location.reload();
+                 window.location.href = "http://lottery.localhost.dev/app_dev.php/index";
+             },1000);
+        });
+
+        $.ul = "";
+        $.li = "";
+        $.z = 0 ,$.y = 0, $.x = 0, $.w = 0, $.v = 0, $.u = 0;
+
+        for($.li = 1; $.li <= 7; $.li++)
+        {
+            $("#mainul").append("<li id='li"+$.li+"' class='numbers'></li><br/>");
+        }
+
+        for(var a = 1; a <= 7; a++) { a = a < 10 ? "0"+a : a; $.z++;$("#li1").append("<label id='"+a+"' class='box'>"+a+"</label>"); }
+
+        $.y = $.z * 2;
+        for(var b = $.z+1; b <= ($.z*2); b++){ b = b < 10 ? "0"+b : b; $("#li2").append("<label id='"+b+"' class='box'>"+b+"</label>"); }
+
+        for(var c = $.y+1; c <= ($.y+7); c++){ $("#li3").append("<label id='"+c+"' class='box'>"+c+"</label>"); }
+
+        $.x = c - 1 ;
+        for(var d = $.x+1; d <= ($.x+7); d++){ $("#li4").append("<label id='"+d+"' class='box'>"+d+"</label>"); }
+
+        $.w = d - 1 ;
+        for(var e = $.w+1; e <= ($.w+7); e++){ $("#li5").append("<label id='"+e+"' class='box'>"+e+"</label>"); }
+
+        $.v = e - 1 ;
+        for(var f = $.v+1; f <= ($.v+7); f++){ $("#li6").append("<label id='"+f+"' class='box'>"+f+"</label>"); }
+/*
+        $.u = f - 1 ;
+        for(var g = $.u+1; g <= ($.u+7); g++){ $("#li7").append("<label id='"+g+"' class='box'>"+g+"</label>"); }
+*/
+        $("#submitEntry").click(function()
+        {     
+            if($.enabled == true)
+            {
+                $.arrange = $.luckyArray;
+                $.boxCounter = 6;
+            }
+            
+            if($.boxCounter == 6)
+            {
+                console.log("ALL: " + $.arrange);
+                $.arrange.sort();
+                console.log("Sorted: " + $.arrange);
+
+                setTimeout(function()
+                {
+                    $(".luck").fadeOut('slow');
+                    $(".luck").fadeIn('slow');
+                    $("#1").html($.arrange[0]);
+                    $("#2").html($.arrange[1]);
+                    $("#3").html($.arrange[2]);
+                    $("#4").html($.arrange[3]);
+                    $("#5").html($.arrange[4]);
+                    $("#6").html($.arrange[5]);
+
+                }, 2000);
+
+                $.object = { "one" : $.arrange[0], "two" : $.arrange[1],
+                             "three" : $.arrange[2], "four" : $.arrange[3],
+                             "five" : $.arrange[4], "six" : $.arrange[5]};
+                try
+                {
+                    $.ajax({
+                        //url: "http://www.jueteng.dev/app_dev.php/validateAll",
+                        url: "http://lottery.localhost.dev/app_dev.php/validateAll",
+                        type: "POST",
+                        data: $.object,
+                        success: function(msg)
+                        {
+                            if("" == msg)
+                            {
+                                alert("No data");
+                                return false;
+                            }
+                            else if(msg == "Lottery bet ends at 8PM...")
+                            {
+                                alert("Lotto bet ends at 8PM...");
+                                return false;
+                            }
+                            else if(msg == "Lottery bet starts at 7AM...")
+                            {
+                                alert("Lottery bet starts at 7AM...");
+                                return false;
+                            }
+                           
+                            var splitter = msg.split(/,/);
+                            var ticketNumber = splitter[0];
+                            var securityCode = splitter[1];
+                            
+                            //alert(ticketNumber + " " + securityCode); return false;    
+                            console.log(msg);
+
+                            $.object = { "ticket_number": ticketNumber, "security_code": securityCode  };
+
+                            $.ajax({
+                                //url: "http://www.jueteng.dev/app_dev.php/getLatestBet",
+                                url: "http://lottery.localhost.dev/app_dev.php/getLatestBet",
+                                type: "POST",
+                                data: $.object,
+                                success: function(msg)
+                                {
+                                    var split = msg.split(/,/);
+                                    $.id           = split[0];
+                                    $.ticketNumber = split[1];
+                                    $.securityCode = split[2];
+                                    $.first        = split[3];
+                                    $.second       = split[4];
+                                    $.third        = split[5];
+                                    $.fourth       = split[6];
+                                    $.fifth        = split[7];
+                                    $.sixth        = split[8];
+                                    $.dateTimeBet  = split[9];
+                                    $.dateTimeDraw = split[10];
+                                    $.isDrawn      = split[11];
+
+                                    $("body").append("\
+                                    <div id='secondContainer'><br />\n\
+                                        <label id='closeBet'>Close</label>\n\
+                                        <div id='betDetails'>\n\
+                                            <div id='divHeader'>6/42</div>\n\
+                                            <div id='betNumbers'>\n\
+                                                <ul>\n\
+                                                    <li style='font-weight: bold;'>Num:</li>\n\
+                                                    <li>"+$.first+"</li>\n\
+                                                    <li>"+$.second+"</li>\n\
+                                                    <li>"+$.third+"</li>\n\
+                                                    <li>"+$.fourth+"</li>\n\
+                                                    <li>"+$.fifth+"</li>\n\
+                                                    <li>"+$.sixth+"</li>\n\
+                                                </ul>\n\
+                                            </div>\n\
+                                            <div class='details'>\n\
+                                                <ul>\n\
+                                                    <li>Date:</li>\n\
+                                                    <li>"+$.dateTimeBet+"</li>\n\
+                                                </ul>\n\
+                                                <ul>\n\
+                                                    <li>Ticket Number:</li>\n\
+                                                    <li>"+$.ticketNumber+"</li>\n\
+                                                </ul>\n\
+                                            </div>\n\
+                                            <div class='details'>\n\
+                                                <ul>\n\
+                                                    <li>Security Code:</li>\n\
+                                                    <li>"+$.securityCode+"</li>\n\
+                                                </ul>\n\
+                                                <ul>\n\
+                                                    <li>Draw Date:</li>\n\
+                                                    <li>"+$.dateTimeDraw+"</li>\n\
+                                                </ul>\n\
+                                            </div>\n\
+                                        </div>\n\
+                                    </div>\n\
+                                    ");
+
+                                    $("#divHeader").css("width", "5em")
+                                                   .css("font-family", "Verdana")
+                                                   .css("font-size", "17px")
+                                                   .css("font-weight", "bold")
+                                                   .css("margin", "auto")
+                                                   .css("padding-top", "auto");
+
+                                    $("#closeBet").css("font-family", "'lucida grande',tahoma,verdana,arial,sans-serif")
+                                                   .css("font-size", "12px")
+                                                   .css("color", "#3B5998")
+                                                   .css("margin-left", "2em")
+                                                   .css("text-decoration", "underline");
+                                    $("#closeBet").hover(function(){ $(this).css("cursor", "pointer"); });
+
+                                    $(".details > ul > li").css("list-style", "none")
+                                                         .css("display", "inline")
+                                                         .css("margin-left", "0.6em")
+                                                         .css("font-family", "'lucida grande',tahoma,verdana,arial,sans-serif")
+                                                         .css("font-size", "16px");
+
+                                    $("#betNumbers > ul > li").css("list-style", "none")
+                                                         .css("display", "inline")
+                                                         .css("padding", "0 0.5em 0 0.5em")
+                                                         .css("font-family", "'lucida grande',tahoma,verdana,arial,sans-serif")
+                                                         .css("font-size", "20px");
+
+                                    $("#secondContainer").css("width", "45em")
+                                                         .css("height", "25em")
+                                                         .css("background-color", "#F9F9F9")
+                                                         .css("margin", "5em auto")
+                                                         .css("border", "1px solid #BABABA")
+                                                         .css("border-radius", "5px");
+
+                                    $("#betDetails").css("background-color", "#E5EECC")
+                                                         .css("box-shadow", "10px 10px 5px #888888")
+                                                         .css("width", "28em")
+                                                         .css("height", "20em")
+                                                         .css("margin", "auto")
+                                                         .css("border-radius", "5px");
+
+                                    $("#closeBet").click(function()
+                                    {
+                                        $("#secondContainer").fadeOut('slow');
+                                        location.reload();
+                                    });
+                                },
+                                error:function(msg)
+                                {
+                                    alert("Failed: " + msg.status + ": " + msg.statusText);
+                                }
+                            });
+
+                        },
+                        error:function(msg)
+                        {
+                            alert("Failed: " + msg.status + ": " + msg.statusText);
+                        }
+                    });
+                }
+                catch(e)
+                {
+                    alert(e.toString());
+                }
+            }
+        });
+
+        $.boxCounter = 0;
+        $.numbers = "";
+        $.arrange = new Array();
+
+        $(".box").each(function()
+        {
+            $(this).click(function()
+            {
+                $.var = $(this).attr("id");
+
+                if($.boxCounter == 6)
+                {
+                    console.log("ALL: " + $.arrange);
+                    $.arrange.sort();
+                    console.log("Sorted: " + $.arrange);
+
+                    setTimeout(function()
+                    {
+                        $(".luck").fadeOut('slow');
+                        $(".luck").fadeIn('slow');
+                        $("#1").html($.arrange[0]);
+                        $("#2").html($.arrange[1]);
+                        $("#3").html($.arrange[2]);
+                        $("#4").html($.arrange[3]);
+                        $("#5").html($.arrange[4]);
+                        $("#6").html($.arrange[5]);
+
+                    }, 2000);
+
+                    return false;
+                }
+
+                $.boxCounter++;
+                console.log("Pinili: " +$.var);
+                //console.log("Counter: " + $.boxCounter);
+
+                $.arrange.push($.var);
+
+                $("#selected").append("<div id='"+$.boxCounter+"' class='luck' style='width: 30px;\n\
+                                            height: 26px;\n\
+                                            border: 1px solid #800000;\n\
+                                            float: left;\n\
+                                            margin-right: 1em;\n\
+                                            text-align: center; padding: 6px 2px 0 2px;\n\
+                                            font-family: tahoma,verdana,arial,sans-serif;'>"+$(this).html()+"<div>");
+
+                $("#"+$.var).css("background-color","#800000")
+                            .css("color", "#DAA520")
+                            .css("-webkit-transition","color 1s ease-in")
+                            .css("-moz-transition","color 1s ease-in")
+                            .css("-o-transition","color 1s ease-in")
+                            .css("transition","background-color 1s ease-in")
+                            .css("-webkit-transition","background-color 1s ease-in")
+                            .css("-moz-transition","background-color 1s ease-in")
+                            .css("-o-transition","background-color 1s ease-in")
+                            .css("transition","background-color 1s ease-in");
+
+               $("#"+$.var).attr('disabled','disabled')
+                       .prop("disabled", true)
+                       .css("pointer-events", "none");
+            });
+        });
+    });
+</script>

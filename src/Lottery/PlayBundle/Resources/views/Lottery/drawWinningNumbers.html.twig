@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        {% block javascripts %}
+            <script src="{{ asset('frontend/js/jquery.js') }}"></script>
+        {% endblock %}
+
+        {% block stylesheets %}
+            <link href="{{ asset('frontend/css/draw.css') }}" type="text/css" rel="stylesheet" />
+        {% endblock %}
+    </head>
+    
+    <body>
+        <div id="centerContainer"><br />            
+            <div id="drawDetails">
+                <div id="divHeader">Draw Numbers</div>
+                
+                <div id="numberContainer">                    
+                </div>
+            </div>
+            <div id="options">
+                <input type="button" id="bttnDraw" value="Draw Numbers" />
+            </div>
+        </div>
+    </body>
+</html>
+
+<script>
+$(document).ready(function()
+{
+    for(var i = 1; i <= 6; i++)
+    {
+        $("#numberContainer").append("<div id='"+i+"' class='luck'><div>");
+    }
+    
+    $("#bttnDraw").click(function()
+    {
+        $.ajax({
+            //url: "http://www.jueteng.dev/app_dev.php/drawWinningNumbers",
+            url: "http://lottery.localhost.dev/app_dev.php/drawWinningNumbers",
+            type: "POST",            
+            success: function(msg)
+            {
+                var split = msg.split(/,/);
+                $.one   = split[0];   
+                $.two   = split[1];   
+                $.three = split[2];   
+                $.four  = split[3];   
+                $.five  = split[4];   
+                $.six   = split[5];          
+                
+                $.count = 0;
+                                   
+                setInterval(function()
+                {
+                    if($.count == 6) return false;
+                    $("#"+($.count+1)).html(split[$.count]);     
+                    $.count++;
+                }, 1000);                            
+            },
+            error:function(msg)
+            {
+                alert("Failed: " + msg.status + ": " + msg.statusText);
+            }
+        });
+    });
+    
+});
+
+</script>
